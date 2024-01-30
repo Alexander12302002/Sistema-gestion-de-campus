@@ -1,5 +1,18 @@
+import os
+
 def create():
-    print("El camper se guardo")
+    os.system("cls")
+    print("""
+        **********************
+        *  Menu del camper   *
+        **********************
+    """)
+    camper = {
+        "Nombre": input("Ingrese el nombre del camper: "),
+        "Apellido": input("Ingrese el apellido del camper: "),
+        "Edad": int(input("Ingrese la edad del camper: "))
+            }
+    print(camper)
 
 def read():
     print("Datos del camper encontrados")
@@ -11,16 +24,23 @@ def delete():
     print("El camper se borro")
 
 def menu():
-    print("""
-**********************
-*  Menu del camper   *
-**********************
-          """)
-    
-    print("1. Guardar \n2. Buscar \n3. Actualizar \n4. Eliminar")
+    menu = ["Guardar", "Buscar","Actualizar","Eliminar","Salir"]
     while(True):
+        os.system("cls")
+        print("""
+            **********************
+            *  Menu del camper   *
+            **********************
+          """)
+        print("".join([f"{i+1}. {val}\n" for i,val in enumerate(menu)]))
         try:
-            opc = int(input)
-            break
+            opc = int(input())
+            if(opc<=len(menu) and opc>0):
+                match (opc):
+                    case 1: create()
+                    case 2: read()
+                    case 3: update()
+                    case 4: delete()
+                    case 5: break
         except ValueError:
-            print("Valor invalido, ingrese un numero de las opciones ")
+            print(f"La opcion no es valida")
